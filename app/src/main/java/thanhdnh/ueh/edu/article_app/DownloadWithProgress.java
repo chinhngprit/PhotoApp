@@ -101,10 +101,11 @@ public class DownloadWithProgress {
   }
 
   private static String getExtensionFromMimeType(String mimeType) {
-    Map<String, String> mimeMap = new HashMap<>();
-    mimeMap.put("image/jpeg", ".jpg");
-    mimeMap.put("image/png", ".png");
-    mimeMap.put("application/json", ".json");
-    return mimeMap.getOrDefault(mimeType, ".jpg");
+    if (mimeType == null) return ".tmp";
+    if (mimeType.contains("image/jpeg")) return ".jpg";
+    if (mimeType.contains("image/png")) return ".png";
+    if (mimeType.contains("application/json")) return ".json";
+    if (mimeType.contains("text/plain")) return ".txt"; // Hỗ trợ link raw của GitHub Gist
+    return ".tmp";
   }
 }
